@@ -34,7 +34,7 @@ const UploadSyllabus = () => {
   const [dragActive, setDragActive] = useState(false);
   const [fileError, setFileError] = useState<string | null>(null);
 
-  const MAX_BYTES = 5 * 1024 * 1024; 
+  const MAX_BYTES = 5 * 1024 * 1024;
 
   const handleFileSelect = useCallback(
     (f: File | undefined) => {
@@ -222,6 +222,11 @@ const UploadSyllabus = () => {
                   sx={{ fontWeight: 500 }}
                 />
               </Fade>
+            )}
+            {events.length > 0 && (
+              <>
+                <GoogleCalendarSync events={events} />
+              </>
             )}
           </Stack>
         </Stack>

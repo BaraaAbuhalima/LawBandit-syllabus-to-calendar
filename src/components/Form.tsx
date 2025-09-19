@@ -100,6 +100,8 @@ const UploadSyllabus = () => {
     setEvents(events.map((e) => (e.id === updatedEvent.id ? updatedEvent : e)));
     setSelectedEvent(null);
   };
+  console.log(events);
+
   return (
     <Box className="upload-wrapper" sx={{ px: { xs: 2, md: 4 }, pt: 3, pb: 6 }}>
       <Paper
@@ -196,6 +198,7 @@ const UploadSyllabus = () => {
                 />
               </Fade>
             )}
+            {events.length > 0 && <GoogleCalendarSync events={events} />}
           </Stack>
         </Stack>
         {events.length > 0 && (
@@ -212,7 +215,6 @@ const UploadSyllabus = () => {
             onEventDrop={handleEventDrop}
             onSelectEvent={setSelectedEvent}
           />
-          <GoogleCalendarSync events={events} />
         </>
       )}
 

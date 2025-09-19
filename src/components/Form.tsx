@@ -32,24 +32,47 @@ const UploadSyllabus = () => {
   const [loading, setLoading] = useState(false);
   const [file, setFile] = useState<File | null>(null);
   const [dragActive, setDragActive] = useState(false);
+  const [fileError, setFileError] = useState<string | null>(null);
 
-  const handleFileSelect = (f: File | undefined) => {
-    if (!f) return;
-    setFile(f);
-  };
+  const MAX_BYTES = 5 * 1024 * 1024; 
 
-  const onDrop = useCallback((e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setDragActive(false);
-    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      handleFileSelect(e.dataTransfer.files[0]);
-    }
-  }, []);
+  const handleFileSelect = useCallback(
+    (f: File | undefined) => {
+      if (!f) return;
+      if (f.size > MAX_BYTES) {
+        setFile(null);
+        setFileError(
+          `File is too large: ${(f.size / (1024 * 1024)).toFixed(
+            2
+          )} MB. Max allowed is 5.00 MB.`
+        );
+        return;
+      }
+      setFileError(null);
+      setFile(f);
+    },
+    [MAX_BYTES]
+  );
+
+  const onDrop = useCallback(
+    (e: React.DragEvent<HTMLDivElement>) => {
+      e.preventDefault();
+      e.stopPropagation();
+      setDragActive(false);
+      if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+        handleFileSelect(e.dataTransfer.files[0]);
+      }
+    },
+    [handleFileSelect]
+  );
 
   const handleUpload = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!file) return;
+    if (file.size > MAX_BYTES) {
+      setFileError("File exceeds 5MB limit.");
+      return;
+    }
     setLoading(true);
 
     const formData = new FormData();
@@ -149,14 +172,19 @@ const UploadSyllabus = () => {
             <Typography variant="subtitle1" fontWeight={600}>
               {file ? "File Selected" : "Drag & Drop your syllabus here"}
             </Typography>
-            <Typography variant="caption" color="text.secondary">
+            <Typography
+              variant="caption"
+              color={fileError ? "error" : "text.secondary"}
+            >
               {file
                 ? `${file.name} • ${(file.size / 1024).toFixed(1)} KB`
                 : "or click to browse"}
             </Typography>
           </Box>
-          <FormHelperText sx={{ ml: 0 }}>
-            All formats supported. it may take ~30–60 seconds to process.
+          <FormHelperText sx={{ ml: 0 }} error={!!fileError}>
+            {fileError
+              ? fileError
+              : "All formats supported. It may take ~30–60 seconds to process. (Max file size: 5MB)"}
           </FormHelperText>
           <Stack
             direction={{ xs: "column", sm: "row" }}

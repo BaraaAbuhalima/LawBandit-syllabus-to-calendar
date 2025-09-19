@@ -1,0 +1,42 @@
+.upload-wrapper {
+  padding: 12px 16px 48px;
+}
+.upload-card {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+}
+.upload-card:before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    circle at 85% 15%,
+    rgba(96, 165, 250, 0.15),
+    transparent 60%
+  );
+}
+.drop-zone {
+  margin-top: 4px;
+  padding: 24px;
+  border: 2px dashed var(--mui-palette-divider);
+  border-radius: 12px;
+  text-align: center;
+  transition: all 0.2s;
+  cursor: pointer;
+  position: relative;
+}
+.drop-zone.active {
+  border-color: var(--mui-palette-primary-main);
+  background: rgba(255, 255, 255, 0.04);
+}
+.events-chip-enter {
+  opacity: 0;
+  transform: translateY(-4px);
+}
+.events-chip-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.3s ease;
+}

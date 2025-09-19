@@ -21,7 +21,6 @@ import {
   Fade,
   useTheme,
 } from "@mui/material";
-// import mockCalendarEvents from "@/lib/mock/mockEvents";
 import GoogleCalendarSync from "@/components/GoogleCalendarSync";
 
 const UploadSyllabus = () => {

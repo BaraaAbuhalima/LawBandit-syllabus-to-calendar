@@ -22,7 +22,6 @@ export default function AppShell({ children }: AppShellProps) {
         minHeight: "100vh",
         display: "flex",
         flexDirection: "column",
-        // Use standard palette background now that customGradients was removed
         backgroundColor: theme.palette.background.default,
       }}
     >

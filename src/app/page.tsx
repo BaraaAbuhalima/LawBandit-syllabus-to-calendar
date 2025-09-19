@@ -1,5 +1,10 @@
-export default function Home() {
+"use client";
+import UploadSyllabus from "../components/Form";
+
+export default function Page(): React.ReactNode {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20"></div>
+    <div className="p-6">
+      <UploadSyllabus />
+    </div>
   );
 }

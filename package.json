@@ -9,19 +9,32 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@mui/icons-material": "^7.3.2",
+    "@mui/material": "^7.3.2",
+    "@syncfusion/ej2-react-schedule": "^31.1.20",
+    "date-fns": "^4.1.0",
+    "googleapis": "^160.0.0",
+    "next": "15.5.3",
+    "openai": "^5.20.3",
+    "pdf-lib": "^1.17.1",
+    "pdfjs-dist": "^5.4.149",
     "react": "19.1.0",
+    "react-big-calendar": "^1.19.4",
     "react-dom": "19.1.0",
-    "next": "15.5.3"
+    "react-tooltip": "^5.29.1"
   },
   "devDependencies": {
-    "typescript": "^5",
+    "@eslint/eslintrc": "^3",
+    "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
+    "@types/react-big-calendar": "^1.16.3",
     "@types/react-dom": "^19",
-    "@tailwindcss/postcss": "^4",
-    "tailwindcss": "^4",
     "eslint": "^9",
     "eslint-config-next": "15.5.3",
-    "@eslint/eslintrc": "^3"
+    "tailwindcss": "^4",
+    "typescript": "^5"
   }
 }

@@ -22,6 +22,7 @@ import {
   useTheme,
 } from "@mui/material";
 import GoogleCalendarSync from "@/components/GoogleCalendarSync";
+import EventList from "@/components/EventList/EventList";
 
 const UploadSyllabus = () => {
   const theme = useTheme();
@@ -238,23 +239,44 @@ const UploadSyllabus = () => {
       </Paper>
 
       {events.length > 0 && (
-        <>
-          <SyllabusCalendar
-            events={events}
-            onEventDrop={handleEventDrop}
-            onSelectEvent={setSelectedEvent}
-          />
-          <GoogleCalendarSync events={events} />
-        </>
+        <Stack
+          direction={{ xs: "column", lg: "row" }}
+          spacing={4}
+          alignItems="flex-start"
+        >
+          <Box flex={1} minWidth={0}>
+            <SyllabusCalendar
+              events={events}
+              onEventDrop={handleEventDrop}
+              onSelectEvent={setSelectedEvent}
+            />
+          </Box>
+          <Box width={{ xs: "100%", lg: 360 }} flexShrink={0}>
+            <EventList
+              events={events}
+              selectedId={selectedEvent?.id ?? null}
+              onSelect={(e) => setSelectedEvent(e)}
+            />
+          </Box>
+        </Stack>
       )}
 
       {selectedEvent && (
-        <EventModal
-          event={selectedEvent}
-          onClose={() => setSelectedEvent(null)}
-          onDelete={handleDelete}
-          onSave={handleSave}
-        />
+        <>
+          <EventModal
+            event={selectedEvent}
+            onClose={() => setSelectedEvent(null)}
+            onDelete={handleDelete}
+            onSave={handleSave}
+          />
+          {/* <GoogleCalendarSync events={events} /> */}
+        </>
+      )}
+
+      {events.length > 0 && (
+        <>
+          <GoogleCalendarSync events={events} />
+        </>
       )}
     </Box>
   );
